@@ -32,5 +32,13 @@ module.exports = {
   ],
   'no-undef': 'error',
   'import/no-extraneous-dependencies': 'off',
-  },
+  'jsx-a11y/anchor-is-valid': [ 'error', {
+    'components': [ 'Link' ],
+    'specialLink': [ 'to', 'url', 'href' ]
+  }],
+  'react/button-has-type': 'off',
+  'react/require-default-props': 'off',
+  'no-underscore-dangle': 'off'
+},
+  
 }
