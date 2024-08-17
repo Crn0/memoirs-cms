@@ -18,8 +18,8 @@ import style from './css/index.module.css';
 import localStorage from '../../helpers/storage/localStorage';
 
 const formState = {
-    email: 'klein@gmail.com',
-    password: 'crnocrno1',
+    email: '',
+    password: '',
 };
 
 export default function Login() {
