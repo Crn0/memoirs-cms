@@ -91,7 +91,27 @@ export default function CommentCard({ comment, postUserId }) {
 }
 
 CommentCard.propTypes = {
-    // eslint-disable-next-line react/forbid-prop-types
-    comment: PropTypes.object.isRequired,
+    comment: PropTypes.shape({
+        author: PropTypes.shape({
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
+            username: PropTypes.string.isRequired,
+            _id: PropTypes.string.isRequired,
+        }).isRequired,
+        body: PropTypes.string.isRequired,
+        created_at: PropTypes.string.isRequired,
+        isDeleted: PropTypes.bool.isRequired,
+        isReply: PropTypes.bool.isRequired,
+        likes: PropTypes.shape({
+            // eslint-disable-next-line react/forbid-prop-types
+            user: PropTypes.arrayOf(PropTypes.object),
+            likes: PropTypes.number,
+        }).isRequired,
+        post: PropTypes.string.isRequired,
+        // eslint-disable-next-line react/forbid-prop-types
+        replies: PropTypes.array.isRequired,
+        updatedAt: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
+    }).isRequired,
     postUserId: PropTypes.string.isRequired,
 };

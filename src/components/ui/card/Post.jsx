@@ -69,6 +69,23 @@ export default function PostCard({ post }) {
 }
 
 PostCard.propTypes = {
-    // eslint-disable-next-line react/forbid-prop-types
-    post: PropTypes.object.isRequired,
+    post: PropTypes.shape({
+        author: PropTypes.shape({
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
+            username: PropTypes.string.isRequired,
+            _id: PropTypes.string.isRequired,
+        }).isRequired,
+        title: PropTypes.string.isRequired,
+        body: PropTypes.string.isRequired,
+        cover: PropTypes.shape({
+            url: PropTypes.string.isRequired,
+            cloudinary_id: PropTypes.string.isRequired,
+        }).isRequired,
+        createdAt: PropTypes.string.isRequired,
+        isPrivate: PropTypes.bool.isRequired,
+        // eslint-disable-next-line react/forbid-prop-types
+        updatedAt: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
+    }).isRequired,
 };
