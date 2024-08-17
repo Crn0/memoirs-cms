@@ -5,16 +5,16 @@
  --light-bg: #FFFFFF;
  --light-color:  #313338;
  --light-code: tomato;
-  
- --dark-bg: #313338;
+ --dark-bg: #000000;
  --dark-color: #FFFFFF;
  --dark-code: gold;
+ --dark-child-bg: #313338;
 }
 
-* {
+/* * {
  background-color: light-dark(var(--light-bg), var(--dark-bg));
  color: light-dark(var(--light-color), var(--dark-color));
-}
+} */
 
 code {
  color: light-dark(var(--light-code), var(--dark-code));
