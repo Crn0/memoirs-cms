@@ -1,0 +1,19 @@
+.app {
+    display: grid;
+    min-height: 100dvh;
+  }
+.form__container {
+    display: grid;
+    place-content: center;
+    place-items: center;
+}
+  
+.dark {
+    background-color: var(--dark-bg);
+    color: var(--dark-color);
+}
+  
+.light {
+    background-color: var(--light-bg);
+    color: var(--light-color);
+}
