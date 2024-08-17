@@ -1,0 +1,10 @@
+.profile {
+    display: grid;
+    place-content: center;
+    place-items: center;
+    padding: 5rem;
+}
+
+.dark {
+    background-color: var(--dark-child-bg);
+}
