@@ -1,0 +1,29 @@
+:root {
+    --footer-dark-bg: var(--dark);
+    --footer-dark-color: var(--gray-100);
+
+    --footer-light-bg: var(--white);
+    --footer-light-color: var(--pure-dark);
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    position: fixed;
+    width: 100%;
+    padding: 1rem;
+    bottom: 0;
+}
+
+.footer--dark {
+    background-color: var(--footer-dark-bg);
+    color: var(--footer-dark-color);
+}
+
+.footer--light {
+    background-color: var(--footer-light-bg);
+    color: var(--footer-light-color);
+}
