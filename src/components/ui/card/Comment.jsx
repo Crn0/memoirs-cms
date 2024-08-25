@@ -1,117 +1,207 @@
-import { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useContext, useEffect, useMemo, useState } from 'react';
+import { useActionData } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import ThemeContext from '../../../context/themeContext';
 import UserContext from '../../../context/userContext';
+import ReplyForm from '../form/ReplyForm';
 import Form from '../form/Form';
 import Fieldset from '../form/Fieldset';
 import Input from '../form/Input';
 import Button from '../button/Button';
+import currentTheme from '../../../helpers/theme/currentTheme';
+import style from './css/comment.module.css';
 
-export default function CommentCard({ comment, postUserId }) {
+export default function Comment({ id, commentsById, setCommentsById }) {
+    const data = useActionData()
     const { theme } = useContext(ThemeContext);
     const { user } = useContext(UserContext);
     const [status, setStatus] = useState('idle');
+    const [reply, setReply] = useState(false);
+    const deleteId = useMemo(() => data?.commentId, [data?.commentId]);
 
+    useEffect(() => {
+        if (deleteId) {
+            setCommentsById(prev => ({...prev, [deleteId]: {
+                ...prev[deleteId],
+                isDeleted: true,
+            }}))
+        }
+    }, [deleteId, setCommentsById])
+
+    const comment = commentsById[id];
     const date = DateTime.fromISO(comment?.created_at).toFormat('LLL dd');
-    const isAuth = user !== null;
+    const isAuth = !!user;
     const author = comment?.author;
+
+    const currBoxShadow = currentTheme(theme);
 
     return (
         <>
             {(() => {
-                if (comment.isDeleted === false) {
-                    return (
-                        <div className={`${theme} comment__detail`}>
-                            <div className='comment__header'>
-                                <p>{`${author.firstName} ${author.lastName}`}</p>
+                if (commentsById[id] === undefined) return null;
+                return (
+                    <ul>
+                        <details
+                            className={`${currBoxShadow(style['comment--light'], style['comment--dark'])}`}
+                            open
+                        >
+                            <summary>
+                                {(() => {
+                                    if (comment?.isDeleted)
+                                        return <span>DELETED</span>;
 
-                                <p>{date}</p>
-                            </div>
+                                    return (
+                                        <span className={`${style.bold}`}>
+                                            {`${author?.firstName} ${author?.lastName}`}{' '}
+                                            •{' '}
+                                            <span
+                                                className={`${style['opacity--05']}`}
+                                            >
+                                                {date}
+                                            </span>
+                                        </span>
+                                    );
+                                })()}
+                            </summary>
 
-                            <div className='comment__body'>
-                                <p>{comment.body}</p>
-                            </div>
+                            {!comment?.isDeleted && (
+                                <div className={`${style.comment__body}`}>
+                                    <p>{comment.body}</p>
+                                </div>
+                            )}
+
+                            <li>
+                                {comment?.replies?.length > 0 &&
+                                    comment.replies.map((r) => (
+                                        <Comment
+                                            key={r}
+                                            id={r}
+                                            parentId={id}
+                                            commentsById={commentsById}
+                                            setCommentsById={setCommentsById}
+                                        />
+                                    ))}
+                            </li>
 
                             {isAuth &&
                                 (() => {
-                                    const currentUserId = user._id;
-                                    if (comment.isDeleted) return null;
-
-                                    if (
-                                        author._id === currentUserId ||
-                                        postUserId === currentUserId
-                                    ) {
+                                    
+                                    if (reply)
                                         return (
-                                            <div className='comment__delete'>
-                                                <Form
-                                                    action=''
-                                                    method='POST'
-                                                    onSubmit={() => {
-                                                        setStatus('submitting');
-                                                    }}
-                                                >
-                                                    <Fieldset fieldName='delete__field'>
-                                                        <Input
-                                                            type='hidden'
-                                                            name='form-id'
-                                                            value='DELETE_COMMENT'
-                                                        />
-
-                                                        <Input
-                                                            type='hidden'
-                                                            name='comment-id'
-                                                            value={`${comment._id}`}
-                                                        />
-
-                                                        <Button
-                                                            type='submit'
-                                                            size='medium'
-                                                            isLoading={status === 'submitting'}
-                                                            disabled={status === 'submitting'}
-                                                        >
-                                                            Delete
-                                                        </Button>
-                                                    </Fieldset>
-                                                </Form>
-                                            </div>
+                                            <ReplyForm
+                                                cols={50}
+                                                rows={5}
+                                                id={id}
+                                                btnSize="xxs"
+                                                btnStyle={`${style.button} ${style['button--reply']}`}
+                                                setReply={setReply}
+                                                setCommentsById={setCommentsById}
+                                             />
                                         );
-                                    }
 
-                                    return null;
+                                    return (
+                                        <div
+                                            className={`${style.comment__btn}`}
+                                        >
+                                            {
+                                                (() => {
+                                                    if ( author?._id !== user?._id || comment?.isDeleted) return null
+
+                                                    return (
+                                                        <Form
+                                                customStyle={`${style.form}`}
+                                                action=""
+                                                method="POST"
+                                                onSubmit={() => {
+                                                    setStatus('submitting');
+                                                }}
+                                            >
+                                                <Fieldset fieldName="delete__field">
+                                                    <Input
+                                                        type="hidden"
+                                                        name="form-id"
+                                                        value="DELETE_COMMENT"
+                                                    />
+
+                                                    <Input
+                                                        type="hidden"
+                                                        name="comment-id"
+                                                        value={`${comment?._id}`}
+                                                    />
+
+                                                    <Button
+                                                        type="submit"
+                                                        customStyle={`${style.button}, ${style['button--delete']}`}
+                                                        size="xxs"
+                                                        disabled={
+                                                            status ===
+                                                            'submitting'
+                                                        }
+                                                    >
+                                                        Delete
+                                                    </Button>
+                                                </Fieldset>
+                                            </Form>
+                                                    );
+                                                })()
+                                            }
+                                            
+
+                                            {
+                                                (() => {
+                                                    if (comment?.isDeleted) return null;
+
+                                                    return (
+                                                        <Button
+                                                        type="button"
+                                                        customStyle={`${style.button}, ${style['button--reply']}`}
+                                                        size="xxs"
+                                                        onClick={() =>
+                                                            setReply(true)
+                                                        }
+                                                    >
+                                                        Reply
+                                                    </Button>
+                                                    );
+                                                })()
+                                            }
+                                        </div>
+                                    );
                                 })()}
-                        </div>
-                    );
-                }
-
-                return null;
+                        </details>
+                    </ul>
+                );
             })()}
         </>
     );
 }
 
-CommentCard.propTypes = {
-    comment: PropTypes.shape({
-        author: PropTypes.shape({
-            firstName: PropTypes.string.isRequired,
-            lastName: PropTypes.string.isRequired,
-            username: PropTypes.string.isRequired,
-            _id: PropTypes.string.isRequired,
-        }).isRequired,
-        body: PropTypes.string.isRequired,
-        created_at: PropTypes.string.isRequired,
-        isDeleted: PropTypes.bool.isRequired,
-        isReply: PropTypes.bool.isRequired,
-        likes: PropTypes.shape({
+Comment.propTypes = {
+    id: PropTypes.string.isRequired,
+    commentsById: PropTypes.objectOf(
+        PropTypes.shape({
+            author: PropTypes.shape({
+                firstName: PropTypes.string.isRequired,
+                lastName: PropTypes.string.isRequired,
+                username: PropTypes.string.isRequired,
+                _id: PropTypes.string.isRequired,
+            }).isRequired,
+            body: PropTypes.string.isRequired,
+            created_at: PropTypes.string.isRequired,
+            isDeleted: PropTypes.bool.isRequired,
+            isReply: PropTypes.bool.isRequired,
+            likes: PropTypes.shape({
+                // eslint-disable-next-line react/forbid-prop-types
+                user: PropTypes.arrayOf(PropTypes.object),
+                likes: PropTypes.number,
+            }).isRequired,
+            post: PropTypes.string.isRequired,
             // eslint-disable-next-line react/forbid-prop-types
-            user: PropTypes.arrayOf(PropTypes.object),
-            likes: PropTypes.number,
-        }).isRequired,
-        post: PropTypes.string.isRequired,
-        // eslint-disable-next-line react/forbid-prop-types
-        replies: PropTypes.array.isRequired,
-        updatedAt: PropTypes.string.isRequired,
-        _id: PropTypes.string.isRequired,
-    }).isRequired,
-    postUserId: PropTypes.string.isRequired,
+            replies: PropTypes.array.isRequired,
+            updatedAt: PropTypes.string.isRequired,
+            _id: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+    setCommentsById: PropTypes.func.isRequired,
 };

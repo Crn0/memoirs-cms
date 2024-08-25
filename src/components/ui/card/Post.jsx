@@ -1,68 +1,66 @@
 import PropTypes from 'prop-types';
-import { useState, useContext } from 'react';
-import UserContext from '../../../context/userContext';
+import { useContext } from 'react';
+import { DateTime } from 'luxon';
 import ThemeContext from '../../../context/themeContext';
 import Link from '../link/Link';
-import Form from '../form/Form';
-import Input from '../form/Input';
-import Button from '../button/Button';
 import style from './css/post.module.css';
+import currentTheme from '../../../helpers/theme/currentTheme';
 
 export default function PostCard({ post }) {
-    const { user } = useContext(UserContext);
     const { theme } = useContext(ThemeContext);
-    const [privacy, setPrivacy] = useState(() => post.isPrivate);
-    const [status, setStatus] = useState('idle');
+    const hasCover = post.cover.url;
+    const { firstName } = post.author;
+    const { lastName } = post.author;
+    const { tags } = post;
+    const date = DateTime.fromISO(post?.createdAt).toFormat('LLL dd');
 
-    const onSubmit = () => {
-        setPrivacy((prev) => {
-            if (prev === 'true') return false;
-
-            return true;
-        });
-        setStatus('submitting');
-    };
+    const currTheme = currentTheme(theme);
 
     return (
-        <div className={`${theme} ${style.post__card}`}>
-            <div className='post__title__container'>
-                <Link url={`/posts/${post._id}`} theme={theme}>
-                    <p className='post__title'>{post.title}</p>
-                </Link>
-            </div>
+        <div
+            className={`${currTheme(style['card--light'], style['card--dark'])}`}
+        >
+            {hasCover && (
+                <div className={`${style.card__cover}`}>
+                    <img
+                        className={`${style['cover--image']}`}
+                        src={post.cover.url}
+                        alt={`Cover of ${post.title}`}
+                    />
+                </div>
+            )}
 
-            <div className='post__status'>
-                <Form
-                    action={`/users/${user._id}/${user.username}`}
-                    method='POST'
-                    onSubmit={onSubmit}
-                    customStyles={`${style.form}`}
-                >
-                    <Input type='hidden' name='status' value={privacy} />
-                    <Input type='hidden' name='post_id' value={post._id} />
-                    <Input type='hidden' name='form-id' value='POST_STATUS' />
+            <div className={`${style.card__body}`}>
+                <div className="post__top">
+                    <div className="post__author">
+                        <p>{`${firstName} ${lastName}`}</p>
+                        <time className={`${style.card__date}`}>{date}</time>
+                    </div>
+                </div>
 
-                    <p>
-                        {(() => {
-                            if (post.isPrivate) return 'Draft';
-
-                            return 'Publish';
-                        })()}
-                    </p>
-
-                    <Button
-                        type='submit'
-                        size='small'
-                        isLoading={status === 'submitting'}
-                        disabled={status === 'submitting'}
+                <div className="post__bottom">
+                    <Link
+                        url={`/posts/${post._id}`}
+                        theme={theme}
+                        customStyle={`${style.card__title}`}
                     >
-                        {(() => {
-                            if (post.isPrivate) return 'Publish';
+                        <p>{post.title}</p>
+                    </Link>
+                    {(() => {
+                        if (tags.length <= 0) return null;
 
-                            return 'Draft';
-                        })()}
-                    </Button>
-                </Form>
+                        return (
+                            <div className={`${style.card__tags}`}>
+                                {tags.map((tag) => (
+                                    <p
+                                        key={tag.name}
+                                        className={`${style['tag--fnt']}`}
+                                    >{`#${tag.name}`}</p>
+                                ))}
+                            </div>
+                        );
+                    })()}
+                </div>
             </div>
         </div>
     );
@@ -82,6 +80,11 @@ PostCard.propTypes = {
             url: PropTypes.string.isRequired,
             cloudinary_id: PropTypes.string.isRequired,
         }).isRequired,
+        tags: PropTypes.arrayOf(
+            PropTypes.shape({
+                name: PropTypes.string,
+            })
+        ),
         createdAt: PropTypes.string.isRequired,
         isPrivate: PropTypes.bool.isRequired,
         // eslint-disable-next-line react/forbid-prop-types

@@ -1,6 +1,50 @@
-.form {
-    display: flex;
+:root {
+    --card-dark-bg: var(--dark);
+    --card-dark-color: var(--gray-100);
+
+    --card-light-bg: var(--white);
+    --card-light-color: var(--pure-dark);
 }
-.post__card {
+
+.card__cover {
     display: flex;
+    height: 200px;
+}
+
+.cover--image {
+    width: 100%;
+    object-fit: fill;
+}
+
+.card__body {
+    padding: 2rem;
+}
+
+.card__title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.card__date {
+    opacity: 0.5;
+}
+
+.card__tags {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tag--fnt {
+    font-size: 0.9rem;
+}
+
+.card--dark {
+    background-color: var(--card-dark-bg);
+    color: var(--card-dark-color);
+    /* width: 800px; */
+}
+
+.card--light {
+    background-color: var(--card-light-bg);
+    color: var(--card-light-color);
 }

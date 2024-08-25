@@ -1,0 +1,77 @@
+:root {
+    --comment-dark-box: var(--pure-dark);
+    --comment-light-box: rgba(var(--int-gray) / 0.1);
+
+    --del-btn-color: var(--white);
+    --del-btn-bg: var(--crimson);
+    --del-btn-border-color: var(--crimson);
+}
+
+ul {
+    list-style: none;
+}
+
+.comment__body {
+    container-type: inline-size;
+}
+
+.comment__body > p {
+    font-size: 3cqi;
+}
+
+.comment__btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2%;
+    padding: 0.5rem;
+}
+
+.comment--dark {
+    box-shadow: 0px 1px 1px var(--comment-dark-box);
+}
+
+.comment--light {
+    box-shadow: 0px 1px 1px var(--comment-light-box);
+}
+
+.form {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.button {
+    border-radius: 2%;
+    opacity: 0.5;
+    box-shadow: var(--del-btn-active-shadow);
+    transition: opacity 1s 0s ease-out;
+}
+
+.button--delete {
+    color: var(--del-btn-color);
+    background-color: var(--del-btn-bg);
+    border: 1px solid var(--del-btn-border-color);
+}
+
+.button--reply {
+    color: var(--bs-btn-color);
+    color: var(--bs-btn-hover-color);
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
+    border: 1px solid var(--bs-btn-border-color);
+    opacity: 0.5;
+    box-shadow: var(--bs-btn-active-shadow);
+    transition: opacity 1s 0s ease-out;
+}
+
+.button--delete:hover,.button--delete:focus,.button--reply:hover,.button--reply:focus {
+    opacity: 1;
+}
+
+
+.bold {
+    font-weight: bold;
+}
+
+.opacity--05 {
+    opacity: 0.5;
+}
