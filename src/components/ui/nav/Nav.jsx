@@ -69,7 +69,7 @@ export default function NavBar() {
                         {['Sign-up', 'Login'].map((val) => (
                             <div key={val} className={`${style.center}`}>
                                 <Link
-                                    url={val.toLowerCase()}
+                                    url={`/${val.toLowerCase()}`}
                                     theme={theme}
                                     customStyle={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
                                 >
