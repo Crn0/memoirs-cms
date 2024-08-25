@@ -3,6 +3,7 @@ import BlogForm from './Form';
 import Preview from './Preview';
 import Button from '../../components/ui/button/Button';
 import reducer, { formState } from './reducer';
+import style from './css/index.module.css';
 
 export default function CMS() {
     const [formData, dispatch] = useReducer(reducer, formState);
@@ -10,10 +11,11 @@ export default function CMS() {
 
     return (
         <section>
-            <div>
+            <div className={`${style.btn__wrapper}`}>
                 <Button
+                    customStyles={`${style.button} ${!preview ? style['button--active'] : ''}`}
                     type='button'
-                    size='medium'
+                    size='lg'
                     testId='blog_edit'
                     onClick={() => {
                         setPreview(false);
@@ -23,8 +25,9 @@ export default function CMS() {
                 </Button>
 
                 <Button
+                    customStyles={`${style.button} ${preview ? style['button--active'] : ''}`}
                     type='button'
-                    size='medium'
+                    size='lg'
                     testId='blog_preview'
                     onClick={() => {
                         setPreview(true);

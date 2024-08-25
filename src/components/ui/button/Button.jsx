@@ -8,14 +8,14 @@ function Button({
     onClick,
     children,
     testId,
-    customStyle = '',
+    customStyles = '',
     isLoading = false,
     disabled = false,
 }) {
     return (
         <button
             type={type}
-            className={`${style.btn} ${style[`btn-${size}`]} ${customStyle}`}
+            className={`${style.btn} ${style[`btn-${size}`]} ${customStyles}`}
             onClick={onClick}
             disabled={disabled}
             data-testid={testId}
@@ -34,7 +34,7 @@ Button.propTypes = {
     size: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     children: PropTypes.node.isRequired,
-    customStyle: PropTypes.string,
+    customStyles: PropTypes.string,
     disabled: PropTypes.bool,
     testId: PropTypes.string,
     isLoading: PropTypes.bool,

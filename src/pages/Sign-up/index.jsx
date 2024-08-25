@@ -34,8 +34,8 @@ export default function SignUp() {
     const error = signUpData?.error;
     const user = signUpData?.user;
     const token = signUpData?.token;
-    
-    const disableButton = (() => {
+
+    const isButtonDisabled = (() => {
         const fieldNames = [
             'firstName',
             'lastName',
@@ -82,47 +82,18 @@ export default function SignUp() {
         <div className={`${style.app} ${theme === 'dark' ? style.dark : style.light}`}>
             <ThemeContext.Provider value={themeMemo}>
                 <Header />
-               
+
                 <main>
                     <section>
                         <div className={`${theme} form__container`}>
-                        <h1>Sign Up</h1>
-                            {error &&
-                                (() => {
-                                    const { messages } = error;
-                                    const fields = [
-                                        'firstName',
-                                        'lastName',
-                                        'email',
-                                        'username',
-                                        'password',
-                                        'confirm_password',
-                                        'authorization_password',
-                                    ];
-
-                                    const fieldErrors =  fields.map((field) => fieldNameIncludes(field, messages))
-                                    const noFieldErrors = !fieldErrors.includes(true) && error;
-                                       
-                                    if (noFieldErrors) {
-                                        return (
-                                            <div className='error__container'>
-                                                <ErrorMessage message={messages} />
-                                            </div>
-                                        );
-                                    }
-
-                                    return fields.map((fName) => (
-                                        <FieldErrorMessage
-                                            key={fName}
-                                            fieldName={fName}
-                                            error={error}
-                                        />
-                                    ));
-                                })()}
                             <Form action='/sign-up' method='POST' onSubmit={handleSubmit}>
+                                <div>
+                                    <h1>Sign Up</h1>
+                                </div>
                                 <Fieldset fieldName='fullname__field'>
                                     <Label name='First name:'>
                                         <Input
+                                            customStyles={`${style.block} ${style['input--medium']}`}
                                             type='text'
                                             name='firstName'
                                             value={inputValue('firstName')}
@@ -132,6 +103,7 @@ export default function SignUp() {
 
                                     <Label name='Last name:'>
                                         <Input
+                                            customStyles={`${style.block} ${style['input--medium']}`}
                                             type='text'
                                             name='lastName'
                                             value={inputValue('lastName')}
@@ -143,6 +115,7 @@ export default function SignUp() {
                                 <Fieldset fieldName='email_username__field'>
                                     <Label name='Email:'>
                                         <Input
+                                            customStyles={`${style.block} ${style['input--medium']}`}
                                             type='email'
                                             name='email'
                                             value={inputValue('email')}
@@ -152,6 +125,7 @@ export default function SignUp() {
 
                                     <Label name='Username:'>
                                         <Input
+                                            customStyles={`${style.block} ${style['input--medium']}`}
                                             type='text'
                                             name='username'
                                             value={inputValue('username')}
@@ -163,6 +137,7 @@ export default function SignUp() {
                                 <Fieldset fieldName='password__field'>
                                     <Label name='Password:'>
                                         <Input
+                                            customStyles={`${style.block} ${style['input--medium']}`}
                                             type='password'
                                             name='password'
                                             value={inputValue('password')}
@@ -172,6 +147,7 @@ export default function SignUp() {
 
                                     <Label name='Confirm password:'>
                                         <Input
+                                            customStyles={`${style.block} ${style['input--medium']}`}
                                             type='password'
                                             name='confirm_password'
                                             value={inputValue('confirm_password')}
@@ -180,8 +156,35 @@ export default function SignUp() {
                                     </Label>
                                 </Fieldset>
 
+                                {error &&
+                                    (() => (
+                                        <div className={`${style.center}`}>
+                                            {[
+                                                'firstName',
+                                                'lastName',
+                                                'email',
+                                                'username',
+                                                'password',
+                                                'confirm_password',
+                                            ].map((fName) => (
+                                                <FieldErrorMessage
+                                                    customStyles={`${style.error}`}
+                                                    key={fName}
+                                                    fieldName={fName}
+                                                    error={error}
+                                                />
+                                            ))}
+                                        </div>
+                                    ))()}
+
                                 <Fieldset fieldName='button__field'>
-                                    <Button type='submit' size='medium' disabled={disableButton}>
+                                    <Button
+                                        type='submit'
+                                        size='lg'
+                                        disabled={isButtonDisabled}
+                                        isLoading={status === 'submitting'}
+                                        customStyles={style.button}
+                                    >
                                         Sign Up
                                     </Button>
                                 </Fieldset>

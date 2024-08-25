@@ -1,19 +1,27 @@
 :root {
     --card-dark-bg: var(--dark);
-    --card-dark-color: var(--gray-100);
+    --card-dark-color: var(--white);
+    --card-dark-box: var(--pure-dark);
 
     --card-light-bg: var(--white);
-    --card-light-color: var(--pure-dark);
+    --card-light-box: rgba(var(--int-gray) / 0.1);
+
+    --card-btn-hover-bg: #6c2bd9;
+    --card-btn-hover-border-color: #6c2bd9;
+    --card-btn-active-color: #fff;
+    --card-btn-active-bg: #6c2bd9;
+    --card-btn-active-border-color: #6c2bd9;
+    --card-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
 }
 
-.card__cover {
-    display: flex;
-    height: 200px;
-}
-
-.cover--image {
-    width: 100%;
-    object-fit: fill;
+.card {
+    display: grid;
+    gap: 1rem;
+    line-height: 2rem;
+    place-content: center;
+    place-items: center;
+    border: 1px solid black;
+    padding: 1rem;
 }
 
 .card__body {
@@ -29,13 +37,23 @@
     opacity: 0.5;
 }
 
-.card__tags {
+.card__form {
     display: flex;
-    gap: 0.5rem;
+    box-shadow: none;
 }
 
-.tag--fnt {
-    font-size: 0.9rem;
+.card__button {
+    color: var(--card-btn-active-color);
+    background-color: var(--card-btn-active-bg);
+    border: 1px solid var(--card-btn-border-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: var(--card-btn-active-shadow);
+    transition: opacity 1s 0s ease-out;
+}
+
+.card__button:hover {
+    opacity: 0.5;
 }
 
 .card--dark {

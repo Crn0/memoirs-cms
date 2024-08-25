@@ -23,7 +23,7 @@ const action = async ({ request }) => {
             body: JSON.stringify(submission),
         });
         const data = await req.json();
-        
+
         if (data.code >= 400) {
             const lowerCaseMessages = data.error.message.map((m) => ({
                 ...m,

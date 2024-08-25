@@ -1,0 +1,21 @@
+.text--center {
+    text-align: center;
+}
+
+.post__list {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+
+.font--size__2 {
+    font-size: 2rem;
+}
+
+.color--dark {
+    color: var(--white);
+}
+
+.color--white {
+    color: var(--pure-dark);
+}

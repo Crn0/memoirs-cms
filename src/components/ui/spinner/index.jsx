@@ -1,8 +1,18 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import ThemeContext from '../../../context/themeContext';
+import style from './css/spinner.module.css';
+import currentTheme from '../../../helpers/theme/currentTheme';
 
-export default function Spinner({ message }) {
+export default function Spinner({ message, customStyle = '' }) {
+    const { theme } = useContext(ThemeContext);
+
+    const currTheme = currentTheme(theme);
+
     return (
-        <div className='spinner'>
+        <div
+            className={`${style.spinner} ${customStyle} ${currTheme(style['spinner--light'], style['spinner--dark'])}`}
+        >
             <svg
                 data-testid='spinner'
                 xmlns='http://www.w3.org/2000/svg'
@@ -23,17 +33,12 @@ export default function Spinner({ message }) {
                     />
                 </path>
             </svg>
-            {(() => {
-                if (message !== undefined) {
-                    return <p>{message}</p>;
-                }
-
-                return null;
-            })()}
+            {message !== '' ? <p>{message}</p> : null}
         </div>
     );
 }
 
 Spinner.propTypes = {
     message: PropTypes.string,
+    customStyle: PropTypes.string,
 };

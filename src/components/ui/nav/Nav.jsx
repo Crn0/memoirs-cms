@@ -16,9 +16,7 @@ export default function NavBar() {
     const username = user?.username;
 
     const handleLogout = async () => {
-        const localStorage = await import(
-            '../../../helpers/storage/localStorage'
-        );
+        const localStorage = await import('../../../helpers/storage/localStorage');
 
         localStorage.default.remove('token');
         setUser(null);
@@ -41,7 +39,7 @@ export default function NavBar() {
                             <div className={`${style.center}`}>
                                 <Link
                                     url={`users/${userId}/${username}`}
-                                    customStyle={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
+                                    customStyles={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
                                     className={theme}
                                 >
                                     {' '}
@@ -51,11 +49,11 @@ export default function NavBar() {
 
                             <div className={`${style.center}`}>
                                 <Button
-                                    type="button"
-                                    size="small"
+                                    type='button'
+                                    size='small'
                                     uncontrolled={false}
                                     onClick={handleLogout}
-                                    customStyle={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
+                                    customStyles={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
                                 >
                                     Logout
                                 </Button>
@@ -71,7 +69,7 @@ export default function NavBar() {
                                 <Link
                                     url={`/${val.toLowerCase()}`}
                                     theme={theme}
-                                    customStyle={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
+                                    customStyles={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
                                 >
                                     {val}
                                 </Link>

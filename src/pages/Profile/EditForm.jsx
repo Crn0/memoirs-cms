@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from 'react';
-import { useActionData, useFetcher, useNavigate, useParams } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import Form from '../../components/ui/form/Form';
 import Fieldset from '../../components/ui/form/Fieldset';
@@ -11,15 +11,14 @@ import fieldNameIncludes from '../../helpers/form/fieldnameIncludes';
 import ErrorMessage from '../../components/errors/errorMessage';
 import FieldErrorMessage from '../../components/ui/form/FieldErrorMessage';
 import FormError from '../../helpers/errors/formError';
-import { BASE_URL } from '../../constants/env';
 import LocalStorage from '../../helpers/storage/localStorage';
+import style from './css/form.module.css';
 
 export default function EditForm({ formData, dispatch, setEdit }) {
     const { setUser } = useContext(UserContext);
     const { userId } = useParams();
     const [status, setStatus] = useState('typing');
     const [error, setError] = useState(null);
-    const fetcher = useFetcher();
 
     const isButtonDisabled =
         formData?.firstName.trim() === '' ||
@@ -53,7 +52,7 @@ export default function EditForm({ formData, dispatch, setEdit }) {
                 username: formData.username,
                 email: formData.email,
             };
-            const res = await fetch(`${BASE_URL}/users/${userId}`, {
+            const res = await fetch(`${URL}/users/${userId}`, {
                 method: 'PUT',
                 headers: myHeaders,
                 body: JSON.stringify(submission),
@@ -65,7 +64,6 @@ export default function EditForm({ formData, dispatch, setEdit }) {
             }
 
             LocalStorage.add('token', fetchData.token);
-            fetcher.load('/');
             setUser(fetchData.user);
             setEdit(false);
 
@@ -79,7 +77,57 @@ export default function EditForm({ formData, dispatch, setEdit }) {
     };
 
     return (
-        <>
+        <Form
+            action=''
+            isReactForm={false}
+            customStyles={`${style.form}`}
+            onSubmit={onSubmit}
+            method='PUT'
+        >
+            <Fieldset fieldName='fullName_field'>
+                <Label name='First name:'>
+                    <Input
+                        customStyles={`${style.block} `}
+                        type='text'
+                        name='firstName'
+                        value={formData.firstName}
+                        onChange={onChange}
+                    />
+                </Label>
+
+                <Label name='Last name:'>
+                    <Input
+                        customStyles={`${style.block} `}
+                        type='text'
+                        name='lastName'
+                        value={formData.lastName}
+                        onChange={onChange}
+                    />
+                </Label>
+            </Fieldset>
+
+            <Fieldset fieldName='email__username_field'>
+                <Label name='Username:'>
+                    <Input
+                        customStyles={`${style.block} `}
+                        type='text'
+                        name='username'
+                        value={formData.username}
+                        onChange={onChange}
+                    />
+                </Label>
+
+                <Label name='Email:'>
+                    <Input
+                        customStyles={`${style.block} `}
+                        type='email'
+                        name='email'
+                        value={formData.email}
+                        onChange={onChange}
+                    />
+                </Label>
+            </Fieldset>
+
             {error &&
                 (() => {
                     const { messages } = error;
@@ -93,69 +141,34 @@ export default function EditForm({ formData, dispatch, setEdit }) {
                     if (noFieldErrors) {
                         return (
                             <div className='error__container'>
-                                <ErrorMessage message={messages} />
+                                <ErrorMessage customStyles={`${style.error}`} message={messages} />
                             </div>
                         );
                     }
 
                     return ['firstName', 'lastName', 'username', 'email'].map((fName) => (
-                        <FieldErrorMessage key={fName} fieldName={fName} error={error} />
+                        <FieldErrorMessage
+                            customStyles={`${style.error}`}
+                            key={fName}
+                            fieldName={fName}
+                            error={error}
+                        />
                     ));
                 })()}
-            <Form action='' isReactForm={false} onSubmit={onSubmit} method='PUT'>
-                <Fieldset fieldName='fullName_field'>
-                    <Label name='fullName:'>
-                        <Input
-                            type='text'
-                            name='firstName'
-                            value={formData.firstName}
-                            onChange={onChange}
-                        />
-                    </Label>
 
-                    <Label name='lastName:'>
-                        <Input
-                            type='text'
-                            name='lastName'
-                            value={formData.lastName}
-                            onChange={onChange}
-                        />
-                    </Label>
-                </Fieldset>
-
-                <Fieldset fieldName='email__username_field'>
-                    <Label name='Username:'>
-                        <Input
-                            type='text'
-                            name='username'
-                            value={formData.username}
-                            onChange={onChange}
-                        />
-                    </Label>
-
-                    <Label name='Email:'>
-                        <Input
-                            type='email'
-                            name='email'
-                            value={formData.email}
-                            onChange={onChange}
-                        />
-                    </Label>
-                </Fieldset>
-
-                <Fieldset fieldName='button__field'>
-                    <Input type='hidden' name='form-id' value='PROFILE_EDIT' />
-                    <Button
-                        type='submit'
-                        size='medium'
-                        isLoading={status === 'submitting'}
-                        disabled={isButtonDisabled}
-                    >
-                        Submit
-                    </Button>
-                </Fieldset>
-            </Form>
-        </>
+            <Fieldset fieldName='button__field'>
+                <Input type='hidden' name='form-id' value='PROFILE_EDIT' />
+                <Button
+                    customStyles={`${style.button}`}
+                    type='submit'
+                    size='medium'
+                    isLoading={status === 'submitting'}
+                    disabled={isButtonDisabled}
+                >
+                    Submit
+                </Button>
+            </Fieldset>
+        </Form>
     );
 }
 

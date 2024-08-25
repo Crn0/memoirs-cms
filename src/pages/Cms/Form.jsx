@@ -14,7 +14,7 @@ import Button from '../../components/ui/button/Button';
 import ErrorMessage from '../../components/errors/errorMessage';
 import fieldNameIncludes from '../../helpers/form/fieldnameIncludes';
 import FieldErrorMessage from '../../components/ui/form/FieldErrorMessage';
-import styles from './css/form.module.css';
+import style from './css/form.module.css';
 
 export default function BlogForm({ formData, dispatch }) {
     const { user } = useContext(UserContext);
@@ -79,10 +79,11 @@ export default function BlogForm({ formData, dispatch }) {
                         setStatus('submitting');
                     }}
                 >
-                    <Fieldset fieldName='form__header'>
-                        <div className={`${styles.post__cover}`}>
+                    <Fieldset fieldName={`${style.form__header}`}>
+                        <div className={`${style.post__cover}`}>
                             <Label
                                 name='Add cover image'
+                                customStyles={`${style.file}`}
                                 onKeyDown={(e) => {
                                     if (e.code === 'Enter') fileRef.current.click();
                                 }}
@@ -117,12 +118,13 @@ export default function BlogForm({ formData, dispatch }) {
                             </Label>
                         </div>
 
-                        <div className={`${styles.post__tile}`}>
+                        <div className={`${style.post__tile}`}>
                             <Label>
                                 <Input
                                     type='text'
                                     name='title'
                                     value={formData.title}
+                                    customStyles={`${style['input--medium']}`}
                                     placeholder='New post title'
                                     onChange={(e) => {
                                         const { value } = e.target;
@@ -136,8 +138,8 @@ export default function BlogForm({ formData, dispatch }) {
                             </Label>
                         </div>
 
-                        <div className={`${styles.post__tags}`}>
-                            <ul>
+                        <div>
+                            <ul className={`${style.post__tags} ${style.ul}`}>
                                 {(() => {
                                     if (formData.tags.size > 0) {
                                         return (
@@ -156,6 +158,7 @@ export default function BlogForm({ formData, dispatch }) {
                                                                     });
                                                                 }}
                                                                 disabled={false}
+                                                                customStyles={`${style.button}`}
                                                             >
                                                                 {`${tag} X`}
                                                             </Button>
@@ -169,7 +172,7 @@ export default function BlogForm({ formData, dispatch }) {
                                 })()}
 
                                 <li>
-                                    <div className={`${styles.tags__input}`}>
+                                    <div className={`${style.tags__input}`}>
                                         <Input
                                             type='hidden'
                                             name='tags'
@@ -181,6 +184,7 @@ export default function BlogForm({ formData, dispatch }) {
                                                 name='type_tags'
                                                 isRequired={false}
                                                 value={formData.type_tags}
+                                                customStyles={`${style['input--medium']}`}
                                                 placeholder={
                                                     formData.tags.size !== 4
                                                         ? 'Press enter to add tags'
@@ -210,6 +214,7 @@ export default function BlogForm({ formData, dispatch }) {
                                                         });
                                                     }
                                                 }}
+                                                isDisabled={formData.tags.size === 4}
                                             />
                                         </Label>
                                     </div>
@@ -219,7 +224,7 @@ export default function BlogForm({ formData, dispatch }) {
                     </Fieldset>
 
                     <Fieldset fieldName='form__body'>
-                        <div className={`${styles.post__body}`}>
+                        <div className={`${style.post__body}`}>
                             <Editor
                                 key={theme}
                                 textareaName='body'
@@ -248,13 +253,14 @@ export default function BlogForm({ formData, dispatch }) {
                         </div>
                     </Fieldset>
 
-                    <Fieldset fieldName='form__button'>
+                    <Fieldset fieldName={`${style.btn__wrapper}`}>
                         <Button
                             type='submit'
                             size='medium'
                             testId='post-submit'
                             isLoading={status === 'submitting'}
                             disabled={disableButton}
+                            customStyles={`${style.button}`}
                         >
                             Publish
                         </Button>
@@ -274,6 +280,7 @@ export default function BlogForm({ formData, dispatch }) {
                                 });
                             }}
                             isLoading={status === 'submitting'}
+                            customStyles={`${style.button}`}
                             disabled={disableButton}
                         >
                             {(() => {

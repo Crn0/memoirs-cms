@@ -15,10 +15,10 @@ export default function Footer() {
         >
             <p>Crn0</p>
             <a
-                href="https://github.com/Crn0/memoirs"
-                aria-label="link"
-                target="_blank"
-                rel="noopener noreferrer"
+                href='https://github.com/Crn0/memoirs'
+                aria-label='link'
+                target='_blank'
+                rel='noopener noreferrer'
             >
                 <FaGithub />
             </a>

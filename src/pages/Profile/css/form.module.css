@@ -1,39 +1,17 @@
-:root {
-    --app-dark-bg: var(--pure-dark);
-    --app-light-bg: var(--gray-100);
-  }
-  
-  .app {
-    display: grid;
-    min-height: 100dvh;
-    max-width: 100dvw;
-    box-shadow: 0 0 0 100vmax;
-    grid-template-rows: 0.1fr 2fr 0.1fr;
-  
-    position: relative;
-  }
-  
-  .dark {
-    background-color: var(--app-dark-bg);
-    /* color: var(--dark-color); */
-  }
-  
-  .light {
-    background-color: var(--app-light-bg);
-    /* color: var(--light-color); */
-  }
-
 .block {
     display: block;
 }
 
-.margin--top {
-    margin-top: 15%;
+.form {
+    background-color: none !important;
+    border: none;
+    box-shadow: none !important;
 }
 
 .input--medium {
     font-size: 2rem;
 }
+
 
 .button {
     color: var(--bs-btn-color);
@@ -57,5 +35,4 @@
 
 .error {
     color: var(--error-color);
-    font-size: 1.2rem;
 }

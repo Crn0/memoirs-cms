@@ -1,13 +1,10 @@
-import { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ThemeContext from '../../../context/themeContext';
+import './css/link.module.css';
 
-export default function Link({ url, children }) {
-    const { theme } = useContext(ThemeContext);
-
+export default function Link({ url, children, customStyles = '' }) {
     return (
-        <RouterLink hrefLang='' to={url} className={`${theme}`}>
+        <RouterLink to={url} className={`${customStyles}`}>
             {children}
         </RouterLink>
     );
@@ -15,5 +12,6 @@ export default function Link({ url, children }) {
 
 Link.propTypes = {
     url: PropTypes.string.isRequired,
+    customStyles: PropTypes.string,
     children: PropTypes.node.isRequired,
 };

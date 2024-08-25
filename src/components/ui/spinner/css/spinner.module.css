@@ -1,0 +1,17 @@
+:root {
+    --spinner-dark-bg: var(--dark);
+    --spinner-dark-color: var(--gray-100);
+
+    --spinner-light-bg: var(--white);
+    --spinner-light-color: var(--pure-dark);
+}
+
+.spinner--dark {
+    /* background-color: var(--spinner-dark-bg); */
+    color: var(--spinner-dark-color);
+}
+
+.spinner--light {
+    /* background-color: var(--spinner-light-bg); */
+    color: var(--spinner-light-color);
+}

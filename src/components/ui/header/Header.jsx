@@ -22,7 +22,7 @@ export default function Header({ children }) {
                     className={`${style.header__btn} ${style.center} ${currTheme(style['btn--light'], style['btn--dark'])}`}
                 >
                     <Link
-                        url="/"
+                        url='/'
                         theme={theme}
                         customStyle={`${currTheme(style['link--light'], style['link--dark'])}`}
                     >
@@ -34,16 +34,16 @@ export default function Header({ children }) {
                     className={`${style.header__theme} ${style.center} ${currTheme(style['theme--light'], style['theme--dark'])}`}
                 >
                     <Button
-                        type="button"
+                        type='button'
                         className={theme}
-                        size="lg"
+                        size='lg'
                         name={theme}
                         onClick={() => {
                             setTheme((mode) => (mode === 'light' ? 'dark' : 'light'));
                             localStorage.add('theme', theme === 'light' ? 'dark' : 'light');
                         }}
-                        customStyle={`${style.header__btn}`}
-                        testId="theme-switcher"
+                        customStyles={`${style.header__btn}`}
+                        testId='theme-switcher'
                     >
                         <ThemeIcon />
                     </Button>

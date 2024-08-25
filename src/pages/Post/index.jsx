@@ -1,28 +1,20 @@
 import { Suspense } from 'react';
-import { useLoaderData, Await, useLocation } from 'react-router-dom';
+import { useLoaderData, Await } from 'react-router-dom';
 import Detail from './Detail';
 import Spinner from '../../components/ui/spinner';
 import PostError from './Error';
+import style from './css/index.module.css';
 
 export default function PostDetail() {
-    const loaderData = useLoaderData();
-    const location = useLocation();
-
-    const data = loaderData?.data;
+    const { data } = useLoaderData();
 
     return (
-        <>
-            {(() => {
-                if (location.state) return <Detail />;
-
-                return (
-                    <Suspense fallback={<Spinner />}>
-                        <Await resolve={data} errorElement={<PostError />}>
-                            <Detail />
-                        </Await>
-                    </Suspense>
-                );
-            })()}
-        </>
+        <Suspense fallback={<Spinner customStyles={`${style.spinner}`} />}>
+            <Await resolve={data} errorElement={<PostError />}>
+                <section>
+                    <Detail />
+                </section>
+            </Await>
+        </Suspense>
     );
 }

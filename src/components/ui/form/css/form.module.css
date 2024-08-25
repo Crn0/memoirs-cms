@@ -1,4 +1,23 @@
+:root {
+    --form-dark-bg: var(--dark);
+    --form-dark-box: var(--pure-dark);
+    --form-dark-color: var(--white);
+
+
+    --form-light-bg: var(--white);
+    --form-light-box: rgba(var(--int-gray) / 0.1);
+    --form-light-color: var(--pure-dark);
+}
+
 form {
     display: grid;
     place-content: center;
+    place-items: center;
+    gap: 1rem;
+}
+
+.form--dark {
+    /* background-color: var(--form-dark-bg); */
+    color: var(--form-dark-color);
+    box-shadow: 0px 1px 1px var(--form-dark-box);
 }

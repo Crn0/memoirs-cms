@@ -1,19 +1,61 @@
-.app {
+:root {
+    --app-dark-bg: var(--pure-dark);
+    --app-light-bg: var(--gray-100);
+  }
+  
+  .app {
     display: grid;
     min-height: 100dvh;
+    max-width: 100dvw;
+    box-shadow: 0 0 0 100vmax;
+    grid-template-rows: 0.1fr 2fr 0.1fr;
+  
+    position: relative;
   }
-.form__container {
-    display: grid;
-    place-content: center;
-    place-items: center;
-}
   
-.dark {
-    background-color: var(--dark-bg);
-    color: var(--dark-color);
-}
+  .dark {
+    background-color: var(--app-dark-bg);
+    /* color: var(--dark-color); */
+  }
   
-.light {
-    background-color: var(--light-bg);
-    color: var(--light-color);
+  .light {
+    background-color: var(--app-light-bg);
+    /* color: var(--light-color); */
+  }
+
+.block {
+    display: block;
+}
+
+.margin--top {
+    margin-top: 15%;
+}
+
+.input--medium {
+    font-size: 2rem;
+}
+
+.button {
+    color: var(--bs-btn-color);
+    border: 1px solid var(--bs-btn-border-color);
+    box-shadow: var(--bs-btn-active-shadow);
+}
+
+.button:disabled {
+    color: var(--bs-btn-disabled-color);
+    background-color: var(--bs-btn-disabled-bg);
+    border-color: var(--bs-btn-disabled-border-color);
+    pointer-events: none;
+    opacity: .65;
+}
+
+.button:hover,.button:focus {
+    color: var(--bs-btn-hover-color);
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
+}
+
+.error {
+    color: var(--error-color);
+    font-size: 1.2rem;
 }

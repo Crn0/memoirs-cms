@@ -8,6 +8,7 @@ export default function Input({
     name,
     value,
     isRequired = true,
+    isDisabled = false,
     customStyles = '',
     onChange = () => {},
     onClick = () => {},
@@ -26,6 +27,7 @@ export default function Input({
                 onClick={onClick}
                 onKeyDown={onKeyDown}
                 placeholder={placeholder}
+                disabled={isDisabled}
             />
         );
     }
@@ -41,6 +43,7 @@ export default function Input({
             onKeyDown={onKeyDown}
             placeholder={placeholder}
             required
+            disabled={isDisabled}
         />
     );
 }
@@ -55,4 +58,5 @@ Input.propTypes = {
     placeholder: PropTypes.string,
     isRequired: PropTypes.bool,
     onClick: PropTypes.func,
+    isDisabled: PropTypes.bool,
 };

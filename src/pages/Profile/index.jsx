@@ -1,16 +1,16 @@
-import { Suspense, useContext, useEffect, useReducer, useState } from 'react';
+import { Suspense, useContext, useReducer, useState } from 'react';
 import { Await, Navigate, useLoaderData, useParams } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import UserContext from '../../context/userContext';
 import ThemeContext from '../../context/themeContext';
+import EditForm from './EditForm';
+import Button from '../../components/ui/button/Button';
+import Spinner from '../../components/ui/spinner';
 import PostsList from './PostList';
 import PostError from './Error';
-import Spinner from '../../components/ui/spinner';
-import style from './css/index.module.css';
-
-import Button from '../../components/ui/button/Button';
 import reducer from './reducer';
-import EditForm from './EditForm';
+import currentTheme from '../../helpers/theme/currentTheme';
+import style from './css/index.module.css';
 
 export default function Profile() {
     const { user } = useContext(UserContext);
@@ -31,6 +31,7 @@ export default function Profile() {
     const date = DateTime.fromISO(user?.createdAt).toFormat('LLL dd yyyy');
 
     const onClick = () => setEdit((isEdit) => !isEdit);
+    const currTheme = currentTheme(theme);
 
     return (
         <>
@@ -38,16 +39,17 @@ export default function Profile() {
                 if (user?._id === userId) {
                     return (
                         <>
-                            <section>
+                            <section className={`${style['f-center']}`}>
                                 {/* <div className='note'>
                                     <p>note: some features are not yet implemented</p>
                                 </div> */}
 
                                 <div
-                                    className={`${style.profile} ${theme === 'dark' ? style.dark : ''}`}
+                                    className={`${style.profile} ${style['profile--mx-w']} ${currTheme(style['profile--light'], style['profile--dark'])}`}
                                 >
                                     <div className='profile__actions'>
                                         <Button
+                                            customStyles={`${style.button}`}
                                             type='button'
                                             size='medium'
                                             onClick={onClick}
@@ -92,9 +94,10 @@ export default function Profile() {
                                     </div>
                                 </div>
                             </section>
-
-                            <section>
-                                <Suspense fallback={<Spinner />}>
+                            <section className={`${style['profile__section--margin']}`}>
+                                <Suspense
+                                    fallback={<Spinner customStyle={`${style.profile__spinner}`} />}
+                                >
                                     <Await resolve={data} errorElement={<PostError />}>
                                         <PostsList />
                                     </Await>

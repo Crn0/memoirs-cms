@@ -59,40 +59,16 @@ export default function Login() {
 
                 <main className={`${theme}`}>
                     <section>
-                        <div className={`${style.form__container}`}>
-                            <h1>Login</h1>
-                            {error &&
-                                (() => {
-                                    const { messages } = error;
-                                    const fields = [
-                                        'email',
-                                        'password',
-                                    ];
-
-                                    const fieldErrors =  fields.map((field) => fieldNameIncludes(field, messages))
-                                    const noFieldErrors = !fieldErrors.includes(true) && error;
-                                       
-                                    if (noFieldErrors) {
-                                        return (
-                                            <div className='error__container'>
-                                                <ErrorMessage message={messages} />
-                                            </div>
-                                        );
-                                    }
-
-                                    return fields.map((fName) => (
-                                        <FieldErrorMessage
-                                            key={fName}
-                                            fieldName={fName}
-                                            error={error}
-                                        />
-                                    ));
-                                })()}
-
+                        <div className={`${style['margin--top']}`}>
                             <Form action='/login' method='POST' onSubmit={handleSubmit}>
+                                <div>
+                                    <h1>Login</h1>
+                                </div>
+
                                 <Fieldset fieldName={formConstants.EMAIL}>
                                     <Label theme={theme} name='Email:'>
                                         <Input
+                                            customStyles={`${style.block} ${style['input--medium']}`}
                                             theme={theme}
                                             type={formConstants.EMAIL}
                                             name={formConstants.EMAIL}
@@ -111,6 +87,7 @@ export default function Login() {
                                 <Fieldset fieldName='password__field'>
                                     <Label theme={theme} name='Password:'>
                                         <Input
+                                            customStyles={`${style.block} ${style['input--medium']}`}
                                             theme={theme}
                                             type={formConstants.PWD}
                                             name={formConstants.PWD}
@@ -126,12 +103,43 @@ export default function Login() {
                                     </Label>
                                 </Fieldset>
 
+                                {error &&
+                                    (() => {
+                                        const { messages } = error;
+                                        const fields = ['email', 'password'];
+                                        const fieldErrors = fields.map((field) =>
+                                            fieldNameIncludes(field, messages),
+                                        );
+                                        const noFieldErrors = !fieldErrors.includes(true) && error;
+
+                                        if (noFieldErrors) {
+                                            return (
+                                                <div className='error__container'>
+                                                    <ErrorMessage
+                                                        customStyles={`${style.error}`}
+                                                        message={messages}
+                                                    />
+                                                </div>
+                                            );
+                                        }
+
+                                        return fields.map((fName) => (
+                                            <FieldErrorMessage
+                                                customStyles={`${style.error}`}
+                                                key={fName}
+                                                fieldName={fName}
+                                                error={error}
+                                            />
+                                        ));
+                                    })()}
+
                                 <Fieldset fieldName='button__field'>
                                     <Button
                                         type='submit'
-                                        size='medium'
-                                        isLoading={status === 'submitting'}
+                                        size='lg'
                                         disabled={isButtonDisabled}
+                                        isLoading={status === 'submitting'}
+                                        customStyles={style.button}
                                     >
                                         Login
                                     </Button>

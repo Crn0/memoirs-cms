@@ -1,9 +1,7 @@
 const LocalStorage = (title) => {
-    const add = (key, value) => {
-        localStorage.setItem(key, value);
-    };
+    const add = (key, value) => localStorage.setItem(key, JSON.stringify(value));
 
-    const get = (key) => localStorage.getItem(key);
+    const get = (key) => JSON.parse(localStorage.getItem(key));
 
     const has = (key) => {
         if (localStorage.getItem(key)) return true;

@@ -1,0 +1,33 @@
+.button__field {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2%;
+}
+
+.button {
+    color: var(--bs-btn-color);
+    color: var(--bs-btn-hover-color);
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
+    border: 1px solid var(--bs-btn-border-color);
+    opacity: 0.5;
+    box-shadow: var(--bs-btn-active-shadow);
+    transition: opacity 1s 0s ease-out;
+}
+
+.button:disabled {
+    color: var(--bs-btn-disabled-color);
+    background-color: var(--bs-btn-disabled-bg);
+    border-color: var(--bs-btn-disabled-border-color);
+    pointer-events: none;
+    opacity: .65;
+}
+
+.button:hover,.button:focus {
+    opacity: 1;
+}
+
+.error {
+    color: var(--error-color);
+    font-size: 1.2rem;
+}
