@@ -4,51 +4,82 @@ import Link from '../link/Link';
 import ThemeContext from '../../../context/themeContext';
 import UserContext from '../../../context/userContext';
 import Button from '../button/Button';
-import localStorage from '../../../helpers/storage/localStorage';
+import style from './css/nav.module.css';
 
 export default function NavBar() {
     const { theme } = useContext(ThemeContext);
     const { user, setUser } = useContext(UserContext);
+
     const navigate = useNavigate();
 
     const userId = user?._id;
     const username = user?.username;
 
     const handleLogout = async () => {
-        localStorage.remove('token');
+        const localStorage = await import(
+            '../../../helpers/storage/localStorage'
+        );
+
+        localStorage.default.remove('token');
         setUser(null);
-        navigate('/login', { replace: true });
+
+        navigate('/', { replace: true });
+    };
+
+    const currentTheme = (light, dark) => {
+        if (theme === 'dark') return dark;
+
+        return light;
     };
 
     return (
-        <nav className={`${theme}`}>
+        <>
             {(() => {
                 if (user) {
                     return (
-                        <div>
-                            <Link url='/posts/new'>Create Post</Link>
+                        <>
+                            <div className={`${style.center}`}>
+                                <Link
+                                    url={`users/${userId}/${username}`}
+                                    customStyle={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
+                                    className={theme}
+                                >
+                                    {' '}
+                                    Profile{' '}
+                                </Link>
+                            </div>
 
-                            <Link url={`/users/${userId}/${username}`}>Profile</Link>
-
-                            <Button
-                                type='button'
-                                size='small'
-                                testId='logout-btn'
-                                onClick={handleLogout}
-                            >
-                                Logout
-                            </Button>
-                        </div>
+                            <div className={`${style.center}`}>
+                                <Button
+                                    type="button"
+                                    size="small"
+                                    uncontrolled={false}
+                                    onClick={handleLogout}
+                                    customStyle={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
+                                >
+                                    Logout
+                                </Button>
+                            </div>
+                        </>
                     );
                 }
 
                 return (
                     <>
-                        <Link url='/sign-up'> Sign-up </Link>
-                        <Link url='/login'> Login </Link>
+                        {['Sign-up', 'Login'].map((val) => (
+                            <div key={val} className={`${style.center}`}>
+                                <Link
+                                    url={val.toLowerCase()}
+                                    theme={theme}
+                                    customStyle={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
+                                >
+                                    {val}
+                                </Link>
+                            </div>
+                        ))}
                     </>
                 );
             })()}
-        </nav>
+        </>
     );
 }
