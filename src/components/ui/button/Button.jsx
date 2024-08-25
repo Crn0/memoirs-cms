@@ -1,24 +1,21 @@
 import PropTypes from 'prop-types';
-import { useContext } from 'react';
-import ThemeContext from '../../../context/themeContext';
+import style from './css/button.module.css';
 import Spinner from '../spinner/index';
 
 function Button({
     type,
     size,
+    onClick,
     children,
+    testId,
+    customStyle = '',
     isLoading = false,
-    testId = 'default_button',
-    customStyles,
-    onClick = () => {},
     disabled = false,
 }) {
-    const { theme } = useContext(ThemeContext);
-
     return (
         <button
             type={type}
-            className={`${theme} ${size} ${customStyles === undefined ? '' : customStyles}`}
+            className={`${style.btn} ${style[`btn-${size}`]} ${customStyle}`}
             onClick={onClick}
             disabled={disabled}
             data-testid={testId}
@@ -37,9 +34,9 @@ Button.propTypes = {
     size: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     children: PropTypes.node.isRequired,
+    customStyle: PropTypes.string,
     disabled: PropTypes.bool,
     testId: PropTypes.string,
-    customStyles: PropTypes.string,
     isLoading: PropTypes.bool,
 };
 
