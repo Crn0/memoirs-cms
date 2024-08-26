@@ -57,7 +57,7 @@ export default function Login() {
             <ThemeContext.Provider value={themeMemo}>
                 <Header />
 
-                <main className={`${theme}`}>
+                <main className={`${style.main}`}>
                     <section>
                         <div className={`${style['margin--top']}`}>
                             <Form action='/login' method='POST' onSubmit={handleSubmit}>
@@ -68,7 +68,7 @@ export default function Login() {
                                 <Fieldset fieldName={formConstants.EMAIL}>
                                     <Label theme={theme} name='Email:'>
                                         <Input
-                                            customStyles={`${style.block} ${style['input--medium']}`}
+                                            customStyles={`${style.block}`}
                                             theme={theme}
                                             type={formConstants.EMAIL}
                                             name={formConstants.EMAIL}
@@ -87,7 +87,7 @@ export default function Login() {
                                 <Fieldset fieldName='password__field'>
                                     <Label theme={theme} name='Password:'>
                                         <Input
-                                            customStyles={`${style.block} ${style['input--medium']}`}
+                                            customStyles={`${style.block}`}
                                             theme={theme}
                                             type={formConstants.PWD}
                                             name={formConstants.PWD}

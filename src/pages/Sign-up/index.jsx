@@ -83,7 +83,7 @@ export default function SignUp() {
             <ThemeContext.Provider value={themeMemo}>
                 <Header />
 
-                <main>
+                <main className={`${style.main}`}>
                     <section>
                         <div className={`${theme} form__container`}>
                             <Form action='/sign-up' method='POST' onSubmit={handleSubmit}>
@@ -93,7 +93,7 @@ export default function SignUp() {
                                 <Fieldset fieldName='fullname__field'>
                                     <Label name='First name:'>
                                         <Input
-                                            customStyles={`${style.block} ${style['input--medium']}`}
+                                            customStyles={`${style.block}`}
                                             type='text'
                                             name='firstName'
                                             value={inputValue('firstName')}
@@ -103,7 +103,7 @@ export default function SignUp() {
 
                                     <Label name='Last name:'>
                                         <Input
-                                            customStyles={`${style.block} ${style['input--medium']}`}
+                                            customStyles={`${style.block}`}
                                             type='text'
                                             name='lastName'
                                             value={inputValue('lastName')}
@@ -115,7 +115,7 @@ export default function SignUp() {
                                 <Fieldset fieldName='email_username__field'>
                                     <Label name='Email:'>
                                         <Input
-                                            customStyles={`${style.block} ${style['input--medium']}`}
+                                            customStyles={`${style.block}`}
                                             type='email'
                                             name='email'
                                             value={inputValue('email')}
@@ -125,7 +125,7 @@ export default function SignUp() {
 
                                     <Label name='Username:'>
                                         <Input
-                                            customStyles={`${style.block} ${style['input--medium']}`}
+                                            customStyles={`${style.block}`}
                                             type='text'
                                             name='username'
                                             value={inputValue('username')}
@@ -137,7 +137,7 @@ export default function SignUp() {
                                 <Fieldset fieldName='password__field'>
                                     <Label name='Password:'>
                                         <Input
-                                            customStyles={`${style.block} ${style['input--medium']}`}
+                                            customStyles={`${style.block}`}
                                             type='password'
                                             name='password'
                                             value={inputValue('password')}
@@ -147,7 +147,7 @@ export default function SignUp() {
 
                                     <Label name='Confirm password:'>
                                         <Input
-                                            customStyles={`${style.block} ${style['input--medium']}`}
+                                            customStyles={`${style.block}`}
                                             type='password'
                                             name='confirm_password'
                                             value={inputValue('confirm_password')}
