@@ -21,7 +21,7 @@ export default function NavBar() {
         localStorage.default.remove('token');
         setUser(null);
 
-        navigate('/', { replace: true });
+        navigate('/login', { replace: true });
     };
 
     const currentTheme = (light, dark) => {
