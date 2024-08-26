@@ -46,7 +46,7 @@ export default function BlogForm({ formData, dispatch }) {
     }, [error, post, navigate]);
 
     return (
-        <div className='post'>
+        <div className={`${style.post}`}>
             <div className='post__error'>
                 {error &&
                     (() => {

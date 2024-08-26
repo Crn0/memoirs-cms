@@ -5,6 +5,10 @@ input[type='file'] {
     display: none;
 }
 
+.post {
+    margin-bottom: 2rem;
+}
+
 .ul {
     list-style: none;
     padding-left: 0;
