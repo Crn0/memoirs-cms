@@ -124,7 +124,6 @@ export default function BlogForm({ formData, dispatch }) {
                                     type='text'
                                     name='title'
                                     value={formData.title}
-                                    customStyles={`${style['input--medium']}`}
                                     placeholder='New post title'
                                     onChange={(e) => {
                                         const { value } = e.target;
@@ -184,7 +183,6 @@ export default function BlogForm({ formData, dispatch }) {
                                                 name='type_tags'
                                                 isRequired={false}
                                                 value={formData.type_tags}
-                                                customStyles={`${style['input--medium']}`}
                                                 placeholder={
                                                     formData.tags.size !== 4
                                                         ? 'Press enter to add tags'

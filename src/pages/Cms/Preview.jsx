@@ -28,19 +28,18 @@ export default function Preview({ formData }) {
                     return (
                         <div className={`${style.post__cover}`}>
                             <img
-                                className={`${style['cover--image']} ${style['w-90']}`}
+                                className={`${style['cover--image']} ${style['w-100']}`}
                                 src={`${imageUrl}`}
                                 alt={`Cover of ${title}`}
                             />
                         </div>
                     );
                 }
-
                 return null;
             })()}
             <div className={`${style.wrapper}`}>
                 <div
-                    className={`${style['mw-90']} ${style.post} ${currTheme(style['post--light'], style['post--dark'])}`}
+                    className={`${style['mw-100']} ${style.post} ${currTheme(style['post--light'], style['post--dark'])}`}
                 >
                     <div className='post__header'>
                         <div className='meta__container'>
