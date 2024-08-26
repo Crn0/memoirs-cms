@@ -48,7 +48,8 @@ export default function Login() {
 
     useEffect(() => {
         if (error) setStatus('error');
-    }, [error]);
+        document.body.style.backgroundColor = theme === 'light' ? '#F5F5F5' : 'black';
+    }, [error, theme]);
 
     useAuthData(error, user, token, setUser);
 
