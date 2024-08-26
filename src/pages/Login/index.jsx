@@ -60,7 +60,7 @@ export default function Login() {
 
                 <main className={`${style.main}`}>
                     <section>
-                        <div className={`${style['margin--top']}`}>
+                        <div>
                             <Form action='/login' method='POST' onSubmit={handleSubmit}>
                                 <div>
                                     <h1>Login</h1>
