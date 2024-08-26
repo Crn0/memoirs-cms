@@ -56,7 +56,7 @@ export default function PostDetail() {
                     return (
                         <div className={`${style.post__cover}`}>
                             <img
-                                className={`${style['cover--image']} ${style['w-90']}`}
+                                className={`${style['cover--image']} ${style['w-100']}`}
                                 src={`${imageUrl}`}
                                 alt={`Cover of ${title}`}
                             />
@@ -68,7 +68,7 @@ export default function PostDetail() {
             })()}
             <div className={`${style.wrapper}`}>
                 <div
-                    className={`${style['mw-90']} ${style.post} ${currTheme(style['post--light'], style['post--dark'])}`}
+                    className={`${style['mw-100']} ${style.post} ${currTheme(style['post--light'], style['post--dark'])}`}
                 >
                     <div className="post__header">
                         <div className="meta__container">
@@ -107,7 +107,7 @@ export default function PostDetail() {
                 </div>
 
                 <div
-                    className={`${style.comment} ${style['mw-90']} ${currTheme(style['comment--light'], style['comment--dark'])}`}
+                    className={`${style.comment} ${style['mw-100']} ${currTheme(style['comment--light'], style['comment--dark'])}`}
                 >
                     <div className="comments__header">
                         <div className={`${style.comment__count}`}>
@@ -134,7 +134,7 @@ export default function PostDetail() {
                                 }
 
                                 return (
-                                    <p>
+                                    <p className={`${style['text--center']}`}>
                                         <Link url="/login" theme={theme}>
                                             Login
                                         </Link>{' '}
