@@ -21,8 +21,10 @@
 .header {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin-bottom: 2rem;
     padding: 1rem;
+    max-height: 90px;
 }
 
 .header__left, .header__right {
@@ -50,6 +52,7 @@
 .header__btn, .header__theme {
     padding: 0.5rem;
     border-radius: 10%;
+    max-height: 50px;
 
 }
 
