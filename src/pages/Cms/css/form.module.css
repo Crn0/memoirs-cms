@@ -49,6 +49,7 @@ input[type='file'] {
 .post__tags {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .btn__wrapper {

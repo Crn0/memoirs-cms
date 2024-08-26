@@ -148,7 +148,7 @@ export default function BlogForm({ formData, dispatch }) {
                                                         <div>
                                                             <Button
                                                                 type='button'
-                                                                size='small'
+                                                                size='xxs'
                                                                 testId={`delete-${tag}`}
                                                                 onClick={() => {
                                                                     dispatch({
