@@ -75,6 +75,12 @@
     gap: 1rem;
 }
 
+.post__body {
+    display: grid;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+
 .comment__count {
     display: grid;
     place-content: center;

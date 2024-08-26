@@ -100,7 +100,7 @@ export default function PostDetail() {
                     </div>
 
                     <div
-                        className="post__body"
+                        className={`${style.post__body}`}
                         // eslint-disable-next-line react/no-danger
                         dangerouslySetInnerHTML={cleanHTML}
                     />
