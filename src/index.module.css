@@ -7,10 +7,11 @@
   display: grid;
   min-height: 100dvh;
   max-width: 100dvw;
-  box-shadow: 0 0 0 100vmax;
-  grid-template-rows: 0.1fr 2fr 0.1fr;
-
   position: relative;
+}
+
+.main {
+  margin-bottom: 2rem;
 }
 
 .dark {

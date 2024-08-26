@@ -24,7 +24,7 @@ function App() {
                 <UserContextContext.Provider value={userMemo}>
                     <Header setTheme={setTheme} />
 
-                    <main className={`${theme}`}>
+                    <main className={`${style.main}`}>
                         <Outlet />
                     </main>
 
