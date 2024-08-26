@@ -26,7 +26,6 @@ function Router() {
                     element: <CMS />,
                 },
                 {
-                    index: true,
                     path: 'posts/new',
                     action: actions.postAction,
                     element: <CMS />,

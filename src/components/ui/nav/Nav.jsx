@@ -36,6 +36,17 @@ export default function NavBar() {
                 if (user) {
                     return (
                         <>
+                        <div className={`${style.center}`}>
+                                <Link
+                                    url='posts/new'
+                                    customStyles={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
+                                    className={theme}
+                                >
+                                    {' '}
+                                    New post{' '}
+                                </Link>
+                            </div>
+
                             <div className={`${style.center}`}>
                                 <Link
                                     url={`users/${userId}/${username}`}
