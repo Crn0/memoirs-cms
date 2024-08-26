@@ -48,7 +48,10 @@
     width: 100%;
     max-width: 50%;
     padding: 2rem;
+}
 
+.comment {
+    margin-bottom: 2rem;
 }
 
 .post__cover {
