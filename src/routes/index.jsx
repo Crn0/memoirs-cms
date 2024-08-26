@@ -14,7 +14,6 @@ function Router() {
         {
             path: '/',
             loader: loaders.rootLoader,
-            shouldRevalidate: () => false,
             element: (
                 <ProtectedRoute>
                     <App />
