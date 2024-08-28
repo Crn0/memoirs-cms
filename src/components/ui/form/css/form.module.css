@@ -19,5 +19,4 @@ form {
 .form--dark {
     /* background-color: var(--form-dark-bg); */
     color: var(--form-dark-color);
-    box-shadow: 0px 1px 1px var(--form-dark-box);
 }
