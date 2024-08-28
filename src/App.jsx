@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext} from 'react';
 import { Outlet } from 'react-router-dom';
 import ThemeContext from './context/themeContext';
 import Header from './components/ui/header';

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import {  useAsyncValue, useLocation } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import ThemeContext from '../../context/themeContext';
@@ -17,29 +17,22 @@ export default function PostDetail() {
     const {state} = useLocation();
     const { theme } = useContext(ThemeContext);
     const { user } = useContext(UserContext);
-    const [commentsById, setCommentsById] = useState(() => {
-        if (asyncData?.post) {
-            return asyncData.post.comments.reduce((_, obj) => {
-                const map = { ..._ };
-                map[obj._id] = obj;
-                return map;
-            }, {})
-        }
-
-        return state.comments.reduce((_, obj) => {
+    const commentsById = useMemo(() => {
+        asyncData.post.comments.reduce((_, obj) => {
             const map = { ..._ };
             map[obj._id] = obj;
             return map;
         }, {})
-    });
-
-    const commentsId = Object.entries(commentsById).reduce((_, obj) => {
-        if (obj[1].isReply) {
-            return _;
-        }
-
-        return [..._, obj[1]._id];
-    }, []);
+    }, [asyncData.post.comments]);
+    const commentsId = useMemo(() => {
+        Object.entries(commentsById).reduce((_, obj) => {
+            if (obj[1].isReply) {
+                return _;
+            }
+    
+            return [..._, obj[1]._id];
+        }, [])
+    }, [commentsById]);
 
     const isAuth = !!user;
 
@@ -136,7 +129,6 @@ export default function PostDetail() {
                                             cols={50}
                                             rows={5}
                                             btnSize="lg"
-                                            setCommentsById={setCommentsById}
                                         >
                                             <Input
                                                 type="hidden"
@@ -172,7 +164,6 @@ export default function PostDetail() {
                                         id={id}
                                         commentsId={null}
                                         commentsById={commentsById}
-                                        setCommentsById={setCommentsById}
                                         postAuthorId={post.author._id}
                                         currUserId={user._id}
                                     />
