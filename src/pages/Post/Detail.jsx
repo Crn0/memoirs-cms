@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import {  useAsyncValue } from 'react-router-dom';
+import {  useAsyncValue, useLocation } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import ThemeContext from '../../context/themeContext';
 import UserContext from '../../context/userContext';
@@ -14,13 +14,24 @@ import style from './css/postDetail.module.css';
 
 export default function PostDetail() {
     const asyncData = useAsyncValue();
+    const {state} = useLocation();
     const { theme } = useContext(ThemeContext);
     const { user } = useContext(UserContext);
-    const [commentsById, setCommentsById] = useState(() => asyncData.post.comments.reduce((_, obj) => {
+    const [commentsById, setCommentsById] = useState(() => {
+        if (asyncData?.post) {
+            return asyncData.post.comments.reduce((_, obj) => {
+                const map = { ..._ };
+                map[obj._id] = obj;
+                return map;
+            }, {})
+        }
+
+        return state.comments.reduce((_, obj) => {
             const map = { ..._ };
             map[obj._id] = obj;
             return map;
-        }, {}));
+        }, {})
+    });
 
     const commentsId = Object.entries(commentsById).reduce((_, obj) => {
         if (obj[1].isReply) {
@@ -32,7 +43,7 @@ export default function PostDetail() {
 
     const isAuth = !!user;
 
-    const { post } = asyncData;
+    const post = asyncData?.post || state;
     const cover = post?.cover;
     const hasCover = post?.cover?.url !== '';
     const imageUrl = cover?.url;

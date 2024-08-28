@@ -5,7 +5,7 @@ import ThemeContext from '../../../context/themeContext';
 import style from './css/form.module.css';
 import currentTheme from '../../../helpers/theme/currentTheme';
 
-export default function Form({ action, method, onSubmit, children, customStyles = '' }) {
+export default function Form({ action, method, onSubmit, children, encType = 'application/x-www-form-urlencoded',  customStyles = '' }) {
     const { theme } = useContext(ThemeContext);
 
     const currTheme = currentTheme(theme);
@@ -16,6 +16,7 @@ export default function Form({ action, method, onSubmit, children, customStyles 
             onSubmit={onSubmit}
             action={action}
             method={method}
+            encType={encType}
             className={`${style.form} ${customStyles} ${currTheme(style['form--light'], style['form--dark'])}`}
         >
             {children}
@@ -30,4 +31,5 @@ Form.propTypes = {
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element])
         .isRequired,
     customStyles: PropTypes.string,
+    encType: PropTypes.string,
 };

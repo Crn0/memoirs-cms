@@ -2,6 +2,7 @@ import loginAction from './loginAction';
 import signUpAction from './signupAction';
 import commentAction from './commentAction';
 import postAction from './postAction';
+import postEditAction from './postEditAction';
 import dashboardAction from './dashboardAction';
 
 export default {
@@ -9,5 +10,6 @@ export default {
     signUpAction,
     commentAction,
     postAction,
+    postEditAction,
     dashboardAction,
 };

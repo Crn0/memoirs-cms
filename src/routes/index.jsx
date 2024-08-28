@@ -8,6 +8,7 @@ import Post from '../pages/Post/index';
 import Dashboard from '../pages/Dashboard';
 import loaders from '../loaders/index';
 import actions from '../actions';
+import CMSEdit from '../pages/Cms-edit';
 
 function Router() {
     const router = createBrowserRouter([
@@ -35,6 +36,12 @@ function Router() {
                     loader: loaders.postDetailLoader,
                     action: actions.commentAction,
                     element: <Post />,
+                },
+                {
+                    path: 'posts/:postId/edit',
+                    loader: loaders.postEditLoader,
+                    action: actions.postEditAction,
+                    element: <CMSEdit />
                 },
                 {
                     path: 'dashboard/:userId?/:username?',
