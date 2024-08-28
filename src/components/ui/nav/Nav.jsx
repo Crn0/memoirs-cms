@@ -75,7 +75,7 @@ export default function NavBar() {
 
                 return (
                     <>
-                        {['Sign-up', 'Login'].map((val) => (
+                        {['Preview', 'Sign-up', 'Login'].map((val) => (
                             <div key={val} className={`${style.center}`}>
                                 <Link
                                     url={`/${val.toLowerCase()}`}

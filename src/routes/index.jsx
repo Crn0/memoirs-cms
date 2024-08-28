@@ -4,11 +4,12 @@ import App from '../App';
 import Login from '../pages/Login';
 import SignUp from '../pages/Sign-up/index';
 import CMS from '../pages/Cms';
+import CMSEdit from '../pages/Cms-edit';
+import CMSPreview from '../pages/Cms-preview';
 import Post from '../pages/Post/index';
 import Dashboard from '../pages/Dashboard';
 import loaders from '../loaders/index';
 import actions from '../actions';
-import CMSEdit from '../pages/Cms-edit';
 
 function Router() {
     const router = createBrowserRouter([
@@ -32,16 +33,16 @@ function Router() {
                     element: <CMS />,
                 },
                 {
-                    path: 'posts/:postId',
-                    loader: loaders.postDetailLoader,
-                    action: actions.commentAction,
-                    element: <Post />,
-                },
-                {
                     path: 'posts/:postId/edit',
                     loader: loaders.postEditLoader,
                     action: actions.postEditAction,
                     element: <CMSEdit />
+                },
+                {
+                    path: 'posts/:postId',
+                    loader: loaders.postDetailLoader,
+                    action: actions.commentAction,
+                    element: <Post />,
                 },
                 {
                     path: 'dashboard/:userId?/:username?',
@@ -50,6 +51,10 @@ function Router() {
                     element: <Dashboard />,
                 },
             ],
+        },
+        {
+            path: 'preview',
+            element: <CMSPreview />,
         },
         {
             path: '/login',
