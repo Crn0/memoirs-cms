@@ -49,12 +49,12 @@ export default function NavBar() {
 
                             <div className={`${style.center}`}>
                                 <Link
-                                    url={`users/${userId}/${username}`}
+                                    url='dashboard'
                                     customStyles={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}
                                     className={theme}
                                 >
                                     {' '}
-                                    Profile{' '}
+                                    Dashboard{' '}
                                 </Link>
                             </div>
 

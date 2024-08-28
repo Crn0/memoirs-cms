@@ -5,7 +5,7 @@ import Login from '../pages/Login';
 import SignUp from '../pages/Sign-up/index';
 import CMS from '../pages/Cms';
 import Post from '../pages/Post/index';
-import Profile from '../pages/Profile';
+import Dashboard from '../pages/Dashboard';
 import loaders from '../loaders/index';
 import actions from '../actions';
 
@@ -37,10 +37,10 @@ function Router() {
                     element: <Post />,
                 },
                 {
-                    path: 'users/:userId/:username?',
-                    loader: loaders.userPostLoader,
-                    action: actions.profileAction,
-                    element: <Profile />,
+                    path: 'dashboard/:userId?/:username?',
+                    loader: loaders.dashboardLoader,
+                    action: actions.dashboardAction,
+                    element: <Dashboard />,
                 },
             ],
         },
