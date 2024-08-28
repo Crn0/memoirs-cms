@@ -186,7 +186,7 @@ export default function BlogForm({ formData, dispatch }) {
                                                 placeholder={
                                                     formData.tags.size !== 4
                                                         ? 'Press enter to add tags'
-                                                        : ''
+                                                        : 'Only 4 tags are allowed'
                                                 }
                                                 onChange={(e) => {
                                                     const { value } = e.target;
