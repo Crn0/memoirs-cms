@@ -19,7 +19,7 @@ function ProtectedRoute({ children }) {
     
     useEffect(() => {
         document.body.style.backgroundColor = theme === 'light' ? '#F5F5F5' : 'black';
-        if (!['Admin', 'Author'].includes(user.membership)) {
+        if (!['Admin', 'Author'].includes(user?.membership)) {
             localStorage.remove('token');
         }
     }, [theme,user]);
@@ -28,7 +28,7 @@ function ProtectedRoute({ children }) {
     return (
         <>
             {(() => {
-                if (['Admin', 'Author'].includes(user.membership)) return (
+                if (['Admin', 'Author'].includes(user?.membership)) return (
                 <ThemeContext.Provider value={themeMemo}>
 
                     <UserContextContext.Provider value={userMemo}>
