@@ -43,7 +43,7 @@ export default function NavBar() {
                                     className={theme}
                                 >
                                     {' '}
-                                    New post{' '}
+                                    Post{' '}
                                 </Link>
                             </div>
 
