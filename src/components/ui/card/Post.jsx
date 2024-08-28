@@ -37,7 +37,7 @@ export default function PostCard({ post }) {
 
             <div className='post__status'>
                 <Form
-                    action={`/users/${user._id}/${user.username}`}
+                    action={`/dashboard/${user._id}/${user.username}`}
                     method='POST'
                     onSubmit={onSubmit}
                     customStyles={`${style.card__form}`}
@@ -46,17 +46,13 @@ export default function PostCard({ post }) {
                     <Input type='hidden' name='post_id' value={post._id} />
                     <Input type='hidden' name='form-id' value='POST_STATUS' />
 
-                    <p>
-                        {(() => {
-                            if (post.isPrivate) return 'Draft';
-
-                            return 'Publish';
-                        })()}
-                    </p>
+                    <Link url={`/posts/${post._id}/edit`} customStyles={`${style.card__button} ${style['pad--04']}`}>
+                        Edit
+                    </Link>
 
                     <Button
                         type='submit'
-                        size='small'
+                        size='xs'
                         customStyles={`${style.card__button}`}
                         isLoading={status === 'submitting'}
                         disabled={status === 'submitting'}
