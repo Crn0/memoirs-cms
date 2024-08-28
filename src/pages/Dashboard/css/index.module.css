@@ -19,12 +19,7 @@
     justify-content: center;
 }
 
-.dashboard {
-    display: grid;
-    gap: 1rem;
-    padding: 5rem;
-    width: 100%;
-}
+
 
 .dashboard__section--margin {
     margin-top: 2%;
