@@ -4,8 +4,6 @@ import LS from '../helpers/storage/localStorage';
 import BaseError from '../helpers/errors/baseError';
 
 const getPost = async (request, params) => {
-    if (LS.has('post')) return LS.get('post');
-
     try {
         const { postId } = params;
         const { searchParams } = new URL(request.url);
@@ -26,8 +24,6 @@ const getPost = async (request, params) => {
         if (res.status >= 400) {
             throw new BaseError('Blog Post Loader', data.code, data.message);
         }
-
-        LS.add('post', data);
 
         return data;
     } catch (error) {

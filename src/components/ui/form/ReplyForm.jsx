@@ -18,11 +18,9 @@ export default function ReplyForm({
     btnSize,
     id,
     setReply,
-    setCommentsById,
     btnStyle = '',
 }) {
     const data = useActionData();
-    const reply = useMemo(() => data?.comment, [data?.comment]);
     const [status, setStatus] = useState('typing');
     const [value, setValue] = useState('');
 
@@ -38,16 +36,7 @@ export default function ReplyForm({
             setValue('');
         }
 
-        if (reply) {
-            setCommentsById((prev) => ({
-                ...prev,
-                [id]: {
-                    ...prev[id],
-                    replies: [...prev[id].replies, reply._id],
-                },
-            }));
-        }
-    }, [status, id, reply, setCommentsById]);
+    }, [status]);
 
     return (
         <Form action='' method='POST' onSubmit={handleSubmit}>
@@ -119,5 +108,4 @@ ReplyForm.propTypes = {
     id: PropTypes.string.isRequired,
     setReply: PropTypes.func.isRequired,
     btnStyle: PropTypes.string,
-    setCommentsById: PropTypes.func.isRequired,
 };
