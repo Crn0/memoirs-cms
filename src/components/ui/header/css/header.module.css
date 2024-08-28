@@ -56,16 +56,24 @@
 
 }
 
-.btn--dark, .theme--dark {
+.btn--dark {
     background-color: var(--btn-dark-bg);
     color: var(--btn-dark-color);
     border: 1px solid var(--btn-border-dark);
 }
 
-.btn--light, .theme--light {
+.btn--light {
     background-color: var(--btn-light-bg);
     color: var(--btn-light-color);
     border: 1px solid var(--btn-border-light);
+}
+
+.theme--dark {
+    color: var(--btn-dark-color);
+}
+
+.theme--light {
+    color: var(--btn-light-color);
 }
 
 .link--dark {
