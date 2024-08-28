@@ -138,7 +138,7 @@ export default function BlogForm({ formData, dispatch }) {
                         </div>
 
                         <div>
-                            <ul className={`${style.post__tags} ${style.ul}`}>
+                            <ul className={`${style['post__tags--wrapper']} ${style.ul}`}>
                                 {(() => {
                                     if (formData.tags.size > 0) {
                                         return (
@@ -157,7 +157,7 @@ export default function BlogForm({ formData, dispatch }) {
                                                                     });
                                                                 }}
                                                                 disabled={false}
-                                                                customStyles={`${style.button}`}
+                                                                customStyles={`${style.post__tags}`}
                                                             >
                                                                 {`${tag} X`}
                                                             </Button>
