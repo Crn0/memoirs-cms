@@ -5,7 +5,14 @@ import ThemeContext from '../../../context/themeContext';
 import style from './css/form.module.css';
 import currentTheme from '../../../helpers/theme/currentTheme';
 
-export default function Form({ action, method, onSubmit, children, encType = 'application/x-www-form-urlencoded',  customStyles = '' }) {
+export default function Form({
+    action,
+    method,
+    onSubmit,
+    children,
+    encType = 'application/x-www-form-urlencoded',
+    customStyles = '',
+}) {
     const { theme } = useContext(ThemeContext);
 
     const currTheme = currentTheme(theme);

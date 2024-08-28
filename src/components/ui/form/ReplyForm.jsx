@@ -12,14 +12,7 @@ import ErrorMessage from '../../errors/errorMessage';
 import FieldErrorMessage from './FieldErrorMessage';
 import Input from './Input';
 
-export default function ReplyForm({
-    cols,
-    rows,
-    btnSize,
-    id,
-    setReply,
-    btnStyle = '',
-}) {
+export default function ReplyForm({ cols, rows, btnSize, id, setReply, btnStyle = '' }) {
     const data = useActionData();
     const [status, setStatus] = useState('typing');
     const [value, setValue] = useState('');
@@ -35,7 +28,6 @@ export default function ReplyForm({
             setStatus('typing');
             setValue('');
         }
-
     }, [status]);
 
     return (

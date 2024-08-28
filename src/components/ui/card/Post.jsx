@@ -46,7 +46,10 @@ export default function PostCard({ post }) {
                     <Input type='hidden' name='post_id' value={post._id} />
                     <Input type='hidden' name='form-id' value='POST_STATUS' />
 
-                    <Link url={`/posts/${post._id}/edit`} customStyles={`${style.card__button} ${style['pad--04']}`}>
+                    <Link
+                        url={`/posts/${post._id}/edit`}
+                        customStyles={`${style.card__button} ${style['pad--04']}`}
+                    >
                         Edit
                     </Link>
 

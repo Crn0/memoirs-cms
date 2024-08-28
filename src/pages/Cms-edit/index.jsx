@@ -8,7 +8,7 @@ import style from './css/index.module.css';
 
 export default function CMSEdit() {
     const data = useLoaderData();
-    const [formData, dispatch] = useReducer(reducer, formState,() => {
+    const [formData, dispatch] = useReducer(reducer, formState, () => {
         if (data?.post) {
             const { post } = data;
             return {

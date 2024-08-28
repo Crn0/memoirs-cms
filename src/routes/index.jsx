@@ -36,7 +36,7 @@ function Router() {
                     path: 'posts/:postId/edit',
                     loader: loaders.postEditLoader,
                     action: actions.postEditAction,
-                    element: <CMSEdit />
+                    element: <CMSEdit />,
                 },
                 {
                     path: 'posts/:postId',

@@ -36,7 +36,7 @@ export default function NavBar() {
                 if (user) {
                     return (
                         <>
-                        <div className={`${style.center}`}>
+                            <div className={`${style.center}`}>
                                 <Link
                                     url='posts/new'
                                     customStyles={`${style.link} ${currentTheme(style['link--light'], style['link--dark'])}`}

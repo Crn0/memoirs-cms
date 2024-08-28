@@ -19,55 +19,54 @@ export default function CMSPreview() {
     });
 
     const themeMemo = useMemo(() => ({ theme, setTheme }), [theme, setTheme]);
-    
+
     useEffect(() => {
         document.body.style.backgroundColor = theme === 'light' ? '#F5F5F5' : 'black';
-        
     }, [theme]);
 
     return (
         <ThemeContext.Provider value={themeMemo}>
             <div className={`${style.app}`}>
-    <Header />
-            <main>
-            <section>
-            <div className={`${style.btn__wrapper}`}>
-                <Button
-                    customStyles={`${style.button} ${!preview ? style['button--active'] : ''}`}
-                    type='button'
-                    size='lg'
-                    testId='blog_edit'
-                    onClick={() => {
-                        setPreview(false);
-                    }}
-                >
-                    Edit
-                </Button>
+                <Header />
+                <main>
+                    <section>
+                        <div className={`${style.btn__wrapper}`}>
+                            <Button
+                                customStyles={`${style.button} ${!preview ? style['button--active'] : ''}`}
+                                type='button'
+                                size='lg'
+                                testId='blog_edit'
+                                onClick={() => {
+                                    setPreview(false);
+                                }}
+                            >
+                                Edit
+                            </Button>
 
-                <Button
-                    customStyles={`${style.button} ${preview ? style['button--active'] : ''}`}
-                    type='button'
-                    size='lg'
-                    testId='blog_preview'
-                    onClick={() => {
-                        setPreview(true);
-                    }}
-                >
-                    Preview
-                </Button>
+                            <Button
+                                customStyles={`${style.button} ${preview ? style['button--active'] : ''}`}
+                                type='button'
+                                size='lg'
+                                testId='blog_preview'
+                                onClick={() => {
+                                    setPreview(true);
+                                }}
+                            >
+                                Preview
+                            </Button>
+                        </div>
+
+                        {(() => {
+                            if (preview === false) {
+                                return <BlogForm formData={formData} dispatch={dispatch} />;
+                            }
+                            return <Preview formData={formData} />;
+                        })()}
+                    </section>
+                </main>
+
+                <Footer />
             </div>
-
-            {(() => {
-                if (preview === false) {
-                    return <BlogForm formData={formData} dispatch={dispatch} />;
-                }
-                return <Preview formData={formData} />;
-            })()}
-        </section>
-            </main>
-
-            <Footer />
-        </div>
         </ThemeContext.Provider>
     );
 }

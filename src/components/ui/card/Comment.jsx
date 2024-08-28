@@ -16,7 +16,7 @@ export default function Comment({ id, commentsById, postAuthorId, currUserId }) 
     const { user } = useContext(UserContext);
     const [status, setStatus] = useState('idle');
     const [reply, setReply] = useState(false);
-  
+
     const comment = commentsById[id];
     const date = DateTime.fromISO(comment?.created_at).toFormat('LLL dd');
     const isAuth = !!user;

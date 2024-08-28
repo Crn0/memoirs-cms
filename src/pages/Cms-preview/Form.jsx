@@ -26,7 +26,6 @@ export default function BlogForm({ formData, dispatch }) {
     const post = postData?.post;
     const error = postData?.error;
 
-
     useEffect(() => {
         if (error) setStatus('error');
         if (post) navigate(`/posts/${post._id}?post=true`, { state: post });

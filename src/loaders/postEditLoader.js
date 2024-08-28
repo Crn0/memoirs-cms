@@ -2,14 +2,13 @@ import { BASE_URL } from '../constants/env';
 import LS from '../helpers/storage/localStorage';
 import BaseError from '../helpers/errors/baseError';
 
-const loader = async ({request, params}) => {
+const loader = async ({ request, params }) => {
     if (LS.get('post')?._id !== params.postId) {
         LS.remove('post');
     }
 
     if (LS.has('post')) {
-
-        return LS.get('post')
+        return LS.get('post');
     }
 
     try {

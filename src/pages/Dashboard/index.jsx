@@ -15,15 +15,17 @@ export default function Dashboard() {
             {(() => {
                 if (['Author', 'Admin'].includes(user.membership)) {
                     return (
-                        <section className={`${style.dashboard} ${style['dashboard__section--margin']}`}>
-                                <Suspense
-                                    fallback={<Spinner customStyle={`${style.dashboard__spinner}`} />}
-                                >
-                                    <Await resolve={data} errorElement={<PostError />}>
-                                        <PostsList />
-                                    </Await>
-                                </Suspense>
-                            </section>
+                        <section
+                            className={`${style.dashboard} ${style['dashboard__section--margin']}`}
+                        >
+                            <Suspense
+                                fallback={<Spinner customStyle={`${style.dashboard__spinner}`} />}
+                            >
+                                <Await resolve={data} errorElement={<PostError />}>
+                                    <PostsList />
+                                </Await>
+                            </Suspense>
+                        </section>
                     );
                 }
 

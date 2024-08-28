@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo } from 'react';
-import {  useAsyncValue, useLocation } from 'react-router-dom';
+import { useAsyncValue, useLocation } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import ThemeContext from '../../context/themeContext';
 import UserContext from '../../context/userContext';
@@ -14,7 +14,7 @@ import style from './css/postDetail.module.css';
 
 export default function PostDetail() {
     const asyncData = useAsyncValue();
-    const {state} = useLocation();
+    const { state } = useLocation();
     const { theme } = useContext(ThemeContext);
     const { user } = useContext(UserContext);
     const commentsById = useMemo(() => {
@@ -22,16 +22,16 @@ export default function PostDetail() {
             const map = { ..._ };
             map[obj._id] = obj;
             return map;
-        }, {})
+        }, {});
     }, [asyncData.post.comments]);
     const commentsId = useMemo(() => {
         Object.entries(commentsById).reduce((_, obj) => {
             if (obj[1].isReply) {
                 return _;
             }
-    
+
             return [..._, obj[1]._id];
-        }, [])
+        }, []);
     }, [commentsById]);
 
     const isAuth = !!user;
@@ -50,10 +50,10 @@ export default function PostDetail() {
     const currTheme = currentTheme(theme);
 
     useEffect(() => {
-        window.addEventListener('beforeunload',localStorage.remove('post'));
+        window.addEventListener('beforeunload', localStorage.remove('post'));
         return () => {
             window.removeEventListener('beforeunload', localStorage.remove('post'));
-        }
+        };
     }, []);
 
     return (
@@ -77,15 +77,17 @@ export default function PostDetail() {
                 <div
                     className={`${style['mw-100']} ${style.post} ${currTheme(style['post--light'], style['post--dark'])}`}
                 >
-                    <div className="post__header">
-                        <div className="meta__container">
-                            <div className="post__meta">
-                                <p className={`${style['font--bold__700']}`}>{`${author?.firstName} ${author?.lastName}`}</p>
+                    <div className='post__header'>
+                        <div className='meta__container'>
+                            <div className='post__meta'>
+                                <p
+                                    className={`${style['font--bold__700']}`}
+                                >{`${author?.firstName} ${author?.lastName}`}</p>
 
                                 <p className={`${style['opacity--08']}`}>{`Posted on ${date}`}</p>
                             </div>
 
-                            <div className="post__title">
+                            <div className='post__title'>
                                 <h1> {title}</h1>
 
                                 {(() => {
@@ -116,24 +118,20 @@ export default function PostDetail() {
                 <div
                     className={`${style.comment} ${style['mw-100']} ${currTheme(style['comment--light'], style['comment--dark'])}`}
                 >
-                    <div className="comments__header">
+                    <div className='comments__header'>
                         <div className={`${style.comment__count}`}>
                             <p> {`${commentCount} comments`} </p>
                         </div>
 
-                        <div className="comments__form">
+                        <div className='comments__form'>
                             {(() => {
                                 if (isAuth) {
                                     return (
-                                        <CommentForm
-                                            cols={50}
-                                            rows={5}
-                                            btnSize="lg"
-                                        >
+                                        <CommentForm cols={50} rows={5} btnSize='lg'>
                                             <Input
-                                                type="hidden"
-                                                name="form-id"
-                                                value="ADD_COMMENT"
+                                                type='hidden'
+                                                name='form-id'
+                                                value='ADD_COMMENT'
                                             />
                                         </CommentForm>
                                     );
@@ -141,11 +139,11 @@ export default function PostDetail() {
 
                                 return (
                                     <p className={`${style['text--center']}`}>
-                                        <Link url="/login" theme={theme}>
+                                        <Link url='/login' theme={theme}>
                                             Login
                                         </Link>{' '}
                                         or{' '}
-                                        <Link url="/sign-up" theme={theme}>
+                                        <Link url='/sign-up' theme={theme}>
                                             Sign-up
                                         </Link>{' '}
                                         to post an comment
@@ -155,7 +153,7 @@ export default function PostDetail() {
                         </div>
                     </div>
 
-                    <div className="comments__list">
+                    <div className='comments__list'>
                         {(() => {
                             if (commentsId?.length) {
                                 return commentsId?.map((id) => (
@@ -170,11 +168,7 @@ export default function PostDetail() {
                                 ));
                             }
 
-                            return (
-                                <p style={{ textAlign: 'center' }}>
-                                    There are no comments
-                                </p>
-                            );
+                            return <p style={{ textAlign: 'center' }}>There are no comments</p>;
                         })()}
                     </div>
                 </div>
