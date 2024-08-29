@@ -17,11 +17,21 @@ export default function PostDetail() {
     const { state } = useLocation();
     const { theme } = useContext(ThemeContext);
     const { user } = useContext(UserContext);
-    const commentsById = asyncData.post.comments.reduce((_, obj) => {
-        const map = { ..._ };
-        map[obj._id] = obj;
-        return map;
-    }, {});
+    const commentsById = (() => {
+        if (asyncData) {
+            return asyncData.post.comments.reduce((_, obj) => {
+                const map = { ..._ };
+                map[obj._id] = obj;
+                return map;
+            }, {});
+        }
+
+        return state.comments.reduce((_, obj) => {
+            const map = { ..._ };
+            map[obj._id] = obj;
+            return map;
+        }, {});
+    })();
     const commentsId = Object.entries(commentsById).reduce((_, obj) => {
         if (obj[1].isReply) {
             return _;
