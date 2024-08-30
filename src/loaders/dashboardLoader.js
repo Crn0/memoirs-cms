@@ -16,11 +16,6 @@ const getPosts = async () => {
         if (res.status >= 400) {
             throw new BaseError('Author Blog Posts Loader', data.code, data.message);
         }
-        await new Promise((resolve, _) => {
-            setTimeout(() => {
-                resolve();
-            }, 2000);
-        });
 
         return data;
     } catch (error) {
